@@ -1,5 +1,39 @@
+import flatpickr from 'flatpickr';
+
+const startBtn = document.querySelector('[data-start]');
+const datetimePicker = document.querySelector('#datetime-picker');
+
+startBtn.disabled = true;
+
+let userSelectedDate = null;
+
+flatpickr(datetimePicker, {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    const selectedDate = selectedDates[0];
+    if (selectedDates[0] <= Date.now()) {
+      alert('Please choose a date in the future');
+      return;
+    }
+
+    startBtn.disabled = false;
+    userSelectedDate = selectedDate;
+  },
+});
+
+startBtn.addEventListener('click', () => {
+  if (userSelectedDate) {
+    datetimePicker.disabled = true;
+    startBtn.disabled = true;
+    timer.updateDeadLine(userSelectedDate);
+  }
+});
+
 const timer = {
-  deadLine: new Date('2025-01-13T23:38:00'),
+  deadLine: null,
   intervalId: null,
   elements: document.querySelectorAll('.value'),
 
@@ -9,6 +43,7 @@ const timer = {
 
       if (diff <= 0) {
         this.stop();
+        datetimePicker.disabled = false;
 
         return;
       }
@@ -58,6 +93,10 @@ const timer = {
   addLeadingZero(value) {
     return String(value).padStart(2, '0');
   },
-};
 
-timer.start();
+  updateDeadLine(newDeadLine) {
+    this.stop();
+    this.deadLine = newDeadLine;
+    this.start();
+  },
+};

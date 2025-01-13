@@ -1,3 +1,6 @@
+/* Додатковий імпорт стилів*/
+@import 'flatpickr/dist/flatpickr.min.css';
+
 /* Base styles */
 :root {
   --primary-font: 'Montserrat', sans-serif;
@@ -49,7 +52,23 @@ main input {
   color: var(--primary-color);
   letter-spacing: var(--letter-spacing);
   border: 1px solid var(--border-color);
+  outline: none;
   border-radius: 4px;
+}
+
+main input:hover {
+  border-color: #000;
+}
+
+main input:focus {
+  border-color: #4E75FF;
+}
+
+main input:disabled {
+  color: #808080;
+  border-color: #808080;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 main button {
@@ -66,9 +85,16 @@ main button {
   cursor: pointer;
   transition: background-color 0.3s ease;
   align-self: flex-start;
-  disabble: true;
 }
 
 main button:hover {
   background-color: var(--button-hover);
+}
+
+main button:disabled {
+  color: #989898;
+  /* opacity: 0.5; */
+  cursor: not-allowed;
+  background-color: #cfcfcf;
+  pointer-events: none;
 }
