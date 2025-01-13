@@ -1,4 +1,5 @@
 import flatpickr from 'flatpickr';
+import iziToast from 'izitoast';
 
 const startBtn = document.querySelector('[data-start]');
 const datetimePicker = document.querySelector('#datetime-picker');
@@ -15,7 +16,18 @@ flatpickr(datetimePicker, {
   onClose(selectedDates) {
     const selectedDate = selectedDates[0];
     if (selectedDates[0] <= Date.now()) {
-      alert('Please choose a date in the future');
+      iziToast.show({
+        message: 'Please choose a date in the future',
+        messageSize: '16',
+        messageColor: 'white',
+        backgroundColor: 'red',
+        // color: 'red',
+        position: 'topRight',
+        icon: 'fa-regular fa-circle-xmark',
+        progressBar: false,
+        timeout: 2000,
+        close: false,
+      });
       return;
     }
 
