@@ -1,0 +1,79 @@
+@import 'izitoast/dist/css/iziToast.min.css';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 408px;
+  padding: 20px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: var(--white);
+}
+
+.form>label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.form fieldset {
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 16px;
+  margin: 0;
+}
+
+.form legend {
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+  padding: 0 8px;
+  text-align: left;
+}
+
+fieldset label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+}
+
+fieldset label:first-of-type {
+  margin-right: 60px;
+}
+
+fieldset input[type="radio"] {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+  position: relative;
+  cursor: pointer;
+}
+
+fieldset input[type="radio"]:checked {
+  border-color: var(--button-primary);
+}
+
+fieldset input[type="radio"]:checked::before {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: var(--button-primary);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form button {
+  margin-left: 0;
+  width: 100%;
+}
