@@ -1,3 +1,28 @@
+import iziToast from 'izitoast';
+
+const toastSettings = {
+  common: {
+    messageSize: '16',
+    messageColor: 'white',
+    position: 'topRight',
+    progressBar: false,
+    close: false,
+    timeout: 3000,
+  },
+  fulfilled: {
+    // iconText: '✅',
+    // icon: 'fa-solid fa-check',
+    backgroundColor: '#59A10D',
+    message: delay => `✅ Fulfilled promise in ${delay}ms`,
+  },
+  rejected: {
+    // iconText: '❌',
+    // icon: 'fa-solid fa-xmark',
+    backgroundColor: '#ff5050',
+    message: delay => `⛔ Rejected promise in ${delay}ms`,
+  },
+};
+
 const form = document.querySelector('.form');
 
 form.addEventListener('submit', handleSubmit);
@@ -18,6 +43,18 @@ function handleSubmit(event) {
   });
 
   promise
-    .then(delay => console.log(`✅ Fulfilled promise in ${delay}ms`))
-    .catch(delay => console.log(`❌ Rejected promise in ${delay}ms`));
+    .then(delay => {
+      iziToast.show({
+        ...toastSettings.common,
+        ...toastSettings.fulfilled,
+        message: toastSettings.fulfilled.message(delay),
+      });
+    })
+    .catch(delay => {
+      iziToast.show({
+        ...toastSettings.common,
+        ...toastSettings.rejected,
+        message: toastSettings.rejected.message(delay),
+      });
+    });
 }
